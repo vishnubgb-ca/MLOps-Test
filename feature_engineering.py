@@ -23,6 +23,10 @@ def feature_engineering():
         data = pd.concat([data, new_row], ignore_index=True)
     data = data.ffill()  # Forward fill NaN values
     data.drop("Current", axis=1, inplace=True)
+    cols = list(data.columns)
+    cols.remove('ds')
+    cols.insert(0, 'ds')
+    data = data[cols]
     print(data.tail())
     data.to_csv("test_data_cleansed.csv", index=False)
     print(".......pipeline successful.....")
